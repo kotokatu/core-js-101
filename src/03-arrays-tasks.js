@@ -7,7 +7,6 @@
  *                                                                                            *
  ******************************************************************************************** */
 
-
 /**
  * Returns an index of the specified element in array or -1 if element is not found
  *
@@ -36,9 +35,10 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  return Array(len).fill(1, 0).map((el, ind) => el + ind * 2);
+  return Array(len)
+    .fill(1, 0)
+    .map((el, ind) => el + ind * 2);
 }
-
 
 /**
  * Returns the doubled array - elements of the specified array
@@ -55,7 +55,6 @@ function generateOdds(len) {
 function doubleArray(arr) {
   return arr.concat(arr);
 }
-
 
 /**
  * Returns an array of positive numbers from the specified array in original order
@@ -119,7 +118,6 @@ function getUpperCaseStrings(arr) {
   return arr.map((el) => el.toUpperCase());
 }
 
-
 /**
  * Returns the array of string lengths from the specified string array.
  *
@@ -166,7 +164,6 @@ function getHead(arr, n) {
   // throw new Error('Not implemented');
 }
 
-
 /**
  * Returns the n last items of the specified array
  *
@@ -182,7 +179,6 @@ function getTail(arr, n) {
 
   // throw new Error('Not implemented');
 }
-
 
 /**
  * Returns CSV representation of two-dimensional numeric array.
@@ -204,8 +200,13 @@ function getTail(arr, n) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  return arr.reduce(
+    (acc, val) => (arr.indexOf(val) === arr.length - 1
+      ? acc + val.join(',')
+      : `${acc + val.join(',')}\n`),
+    '',
+  );
 }
 
 /**
@@ -219,10 +220,9 @@ function toCsvText(/* arr */) {
  *   [ 0, 1, 2, 3, 4, 5 ] => [ 0, 1, 4, 9, 16, 25 ]
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
-function toArrayOfSquares(/* arr */) {
-  throw new Error('Not implemented');
+function toArrayOfSquares(arr) {
+  return arr.map((el) => el * el);
 }
-
 
 /**
  * Transforms the numeric array to the according moving sum array:
@@ -238,8 +238,12 @@ function toArrayOfSquares(/* arr */) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  let sum = 0;
+  return arr.map((el, ind) => {
+    sum += el;
+    return ind ? sum : el;
+  });
 }
 
 /**
@@ -253,10 +257,9 @@ function getMovingSum(/* arr */) {
  * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
  * [ "a" ] => []
  */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
+function getSecondItems(arr) {
+  return arr.filter((el, ind) => ind % 2);
 }
-
 
 /**
  * Propagates every item in sequence its position times
@@ -276,7 +279,6 @@ function propagateItemsByPositionIndex(/* arr */) {
   throw new Error('Not implemented');
 }
 
-
 /**
  * Returns the 3 largest numbers from the specified array
  *
@@ -293,7 +295,6 @@ function propagateItemsByPositionIndex(/* arr */) {
 function get3TopItems(/* arr */) {
   throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the number of positive numbers from specified array
@@ -393,7 +394,6 @@ function findAllOccurrences(/* arr, item */) {
 function toStringList(/* arr */) {
   throw new Error('Not implemented');
 }
-
 
 /**
  * Sorts the specified array by country name first and city name
@@ -513,7 +513,6 @@ function group(/* array, keySelector, valueSelector */) {
   throw new Error('Not implemented');
 }
 
-
 /**
  * Projects each element of the specified array to a sequence
  * and flattens the resulting sequences into one array.
@@ -531,7 +530,6 @@ function selectMany(/* arr, childrenSelector */) {
   throw new Error('Not implemented');
 }
 
-
 /**
  * Returns an element from the multidimensional array by the specified indexes.
  *
@@ -547,7 +545,6 @@ function selectMany(/* arr, childrenSelector */) {
 function getElementByIndexes(/* arr, indexes */) {
   throw new Error('Not implemented');
 }
-
 
 /**
  * Swaps the head and tail of the specified array:
@@ -570,7 +567,6 @@ function getElementByIndexes(/* arr, indexes */) {
 function swapHeadAndTail(/* arr */) {
   throw new Error('Not implemented');
 }
-
 
 module.exports = {
   findElement,
