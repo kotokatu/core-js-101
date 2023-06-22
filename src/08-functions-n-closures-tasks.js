@@ -8,7 +8,6 @@
  *                                                                                             *
  ********************************************************************************************* */
 
-
 /**
  * Returns the functions composition of two specified functions f(x) and g(x).
  * The result of compose is to be a function of one argument, (lets call the argument x),
@@ -26,7 +25,6 @@
 function getComposition(f, g) {
   return (x) => f(g(x));
 }
-
 
 /**
  * Returns the math power function with the specified exponent
@@ -48,7 +46,6 @@ function getPowerFunction(exponent) {
   return (n) => n ** exponent;
 }
 
-
 /**
  * Returns the polynom function of one argument based on specified coefficients.
  * See: https://en.wikipedia.org/wiki/Polynomial#Definition
@@ -65,7 +62,6 @@ function getPowerFunction(exponent) {
 function getPolynom(...args) {
   return (x) => [...args].reverse().reduce((acc, curr, ind) => acc + curr * x ** ind);
 }
-
 
 /**
  * Memoizes passed function and returns function
@@ -92,7 +88,6 @@ function memoize(func) {
     : () => num;
 }
 
-
 /**
  * Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
@@ -108,10 +103,21 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  let attempt = 0;
+  const foo = () => {
+    if (attempt < attempts) {
+      try {
+        func();
+      } catch (err) {
+        foo();
+        attempt += 1;
+      }
+    }
+    return func();
+  };
+  return foo;
 }
-
 
 /**
  * Returns the logging wrapper for the specified method,
@@ -136,10 +142,15 @@ function retry(/* func, attempts */) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger(func, logFunc) {
+  return (...args) => {
+    const argsStr = JSON.stringify(args).slice(1, -1);
+    logFunc(`${func.name}(${argsStr}) starts`);
+    const res = func(...args);
+    logFunc(`${func.name}(${argsStr}) ends`);
+    return res;
+  };
 }
-
 
 /**
  * Return the function with partial applied arguments
@@ -154,10 +165,9 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  return (...args2) => fn(...args1, ...args2);
 }
-
 
 /**
  * Returns the id generator function that returns next integer starting
@@ -176,10 +186,14 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let k = startFrom;
+  return () => {
+    const i = k;
+    k += 1;
+    return i;
+  };
 }
-
 
 module.exports = {
   getComposition,
