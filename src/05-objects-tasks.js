@@ -214,18 +214,6 @@ const cssSelectorBuilder = {
     return (new Builder()).pseudoElement(value);
   },
 
-  doublesError() {
-    (new Builder()).doublesError();
-  },
-
-  orderError() {
-    (new Builder()).orderError();
-  },
-
-  validateOrder(num) {
-    return (new Builder()).validateOrder(num);
-  },
-
   stringify() {
     return (new Builder()).stringify();
   },
