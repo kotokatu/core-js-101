@@ -191,35 +191,35 @@ class Builder {
 
 const cssSelectorBuilder = {
   element(value) {
-    return (new Builder()).element(value);
+    return new Builder().element(value);
   },
 
   id(value) {
-    return (new Builder()).id(value);
+    return new Builder().id(value);
   },
 
   class(value) {
-    return (new Builder()).class(value);
+    return new Builder().class(value);
   },
 
   attr(value) {
-    return (new Builder()).attr(value);
+    return new Builder().attr(value);
   },
 
   pseudoClass(value) {
-    return (new Builder()).pseudoClass(value);
+    return new Builder().pseudoClass(value);
   },
 
   pseudoElement(value) {
-    return (new Builder()).pseudoElement(value);
+    return new Builder().pseudoElement(value);
   },
 
   stringify() {
-    return (new Builder()).stringify();
+    return new Builder().stringify();
   },
 
   combine(selector1, combinator, selector2) {
-    return (new Builder()).combine(selector1, combinator, selector2);
+    return new Builder().combine(selector1, combinator, selector2);
   },
 };
 
